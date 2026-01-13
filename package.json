@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "description": "Monorepo for generating slide decks with Remotion",
+  "packageManager": "pnpm@10.28.0",
   "engines": {
     "node": ">=20.0.0",
     "pnpm": ">=9.0.0"
