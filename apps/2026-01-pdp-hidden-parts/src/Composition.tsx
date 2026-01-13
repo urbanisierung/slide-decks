@@ -2,8 +2,11 @@ import {
   ContentSlide as SharedContentSlide,
   TitleSlide as SharedTitleSlide,
   Slide,
+  MotionSteps,
+  MotionTransform,
 } from "@slide-decks/core";
 import type React from "react";
+import handlePdpSvg from "./img/handle-pdp.svg";
 
 export const PDPPresentation: React.FC = () => {
   // Cyberpunk colors
@@ -50,57 +53,36 @@ export const PDPPresentation: React.FC = () => {
 
       {/* Introduction */}
       <Slide id="intro" background={darkBg}>
-        <SharedContentSlide
-          title={
-            <h2
-              style={{
-                fontSize: "80px",
-                fontWeight: "bold",
-                background: `linear-gradient(135deg, ${neonPink} 0%, ${neonBlue} 100%)`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                margin: "0 0 60px 0",
-                letterSpacing: "-1px",
-              }}
+        <MotionSteps totalSteps={2}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              height: "100%",
+              overflow: "hidden",
+            }}
+          >
+            <MotionTransform
+              transforms={[
+                { scale: 1, x: 0, y: 0 },
+                { scale: 2.5, x: 350, y: 0 },
+              ]}
+              duration={1}
+              easing="backOut"
             >
-              What is PDP?
-            </h2>
-          }
-        >
-          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {[
-              "Product Development Pipeline automation",
-              "Connects Product Hub issues to systems",
-              "Powers the workflow behind the scenes",
-              "Most developers see only the surface",
-            ].map((bullet, index) => (
-              <li
-                key={index}
+              <img
+                src={handlePdpSvg}
+                alt="PDP BPMN Process"
                 style={{
-                  fontSize: "48px",
-                  color: "#e6f1ff",
-                  marginBottom: "40px",
-                  display: "flex",
-                  alignItems: "center",
-                  lineHeight: 1.4,
+                  width: "1600px",
+                  height: "auto",
                 }}
-              >
-                <span
-                  style={{
-                    color: neonPink,
-                    marginRight: "30px",
-                    fontSize: "32px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  ▸
-                </span>
-                <span>{bullet}</span>
-              </li>
-            ))}
-          </ul>
-        </SharedContentSlide>
+              />
+            </MotionTransform>
+          </div>
+        </MotionSteps>
       </Slide>
 
       {/* Section: BPMN Process */}
