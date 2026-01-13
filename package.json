@@ -1,0 +1,29 @@
+{
+  "name": "slide-decks",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Monorepo for generating slide decks with Remotion",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "check": "turbo run check",
+    "verify": "pnpm lint && pnpm check && pnpm test && pnpm build",
+    "clean": "turbo run clean && rm -rf node_modules .turbo"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.3.11",
+    "@types/node": "25.0.7",
+    "@types/react": "19.2.8",
+    "turbo": "2.7.4",
+    "typescript": "5.9.3",
+    "vitest": "4.0.17"
+  }
+}
