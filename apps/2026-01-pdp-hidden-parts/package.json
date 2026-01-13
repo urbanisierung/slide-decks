@@ -5,8 +5,8 @@
   "private": true,
   "description": "PDP: the hidden parts - Slide deck presentation",
   "scripts": {
-    "dev": "remotion studio src/index.ts",
-    "render": "remotion render src/index.ts PDPPresentation out/pdp-presentation.mp4",
+    "dev": "reactslides dev src/index.tsx",
+    "render": "reactslides render src/index.tsx PDPPresentation out/pdp-presentation.mp4",
     "build": "tsc --noEmit",
     "check": "tsc --noEmit",
     "test": "echo 'No tests yet'",

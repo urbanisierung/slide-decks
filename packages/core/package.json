@@ -13,10 +13,10 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@remotion/cli": "4.0.405",
-    "@remotion/player": "4.0.405",
+    "@reactslides/cli": "0.0.11",
+    "@reactslides/core": "0.0.11",
+    "@reactslides/shared-ui": "0.0.11",
     "react": "19.2.3",
-    "react-dom": "19.2.3",
-    "remotion": "4.0.405"
+    "react-dom": "19.2.3"
   }
 }

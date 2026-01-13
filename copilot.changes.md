@@ -1,11 +1,43 @@
 # Changes Made to Slide Decks Repository
 
+## Migrated from Remotion to ReactSlides (2026-01-13)
+
+### Major Changes
+- **Replaced Remotion with ReactSlides**: Switched from Remotion to ReactSlides (@reactslides/core, @reactslides/shared-ui, @reactslides/cli) as requested
+- **Updated Dependencies**:
+  - Removed: `remotion`, `@remotion/cli`, `@remotion/player`
+  - Added: `@reactslides/core@0.0.11`, `@reactslides/shared-ui@0.0.11`, `@reactslides/cli@0.0.11`
+  - Kept: `react@19.2.3`, `react-dom@19.2.3`
+
+### Code Changes
+- **Slide Components**: Rewrote all slide components to use ReactSlides' declarative Slide API instead of Remotion's frame-based Sequence API
+- **Entry Point**: Changed from `index.ts` to `index.tsx` and updated to use ReactSlides Presentation component
+- **Removed Files**:
+  - `Root.tsx` (no longer needed)
+  - `remotion.config.ts` (no longer needed)
+  - `src/components/` directory (using shared-ui components instead)
+- **Updated Scripts**: Changed `dev` and `render` scripts to use `reactslides` CLI instead of `remotion`
+
+### Architecture
+- ReactSlides uses a simpler, slide-based approach without frame timing
+- Each slide is a declarative `<Slide>` component with an ID
+- Navigation is handled automatically by ReactSlides
+- Cyberpunk theme colors preserved throughout the presentation
+
+### Benefits of ReactSlides
+- More developer-friendly API without frame calculations
+- Built-in presenter mode and overview grid
+- Better keyboard/touch/mouse navigation out of the box
+- Includes shared UI components (TitleSlide, ContentSlide, etc.)
+
+---
+
 ## Initial Setup (2026-01-13)
 
 ### Monorepo Structure
 - Created pnpm workspace configuration
 - Setup root `package.json` with all dev dependencies (Biome, TypeScript, Turbo, Vitest)
-- Created `packages/core` with runtime dependencies (React, Remotion)
+- Created `packages/core` with runtime dependencies (React, ReactSlides)
 - Created `apps/2026-01-pdp-hidden-parts` as the first slide deck application
 
 ### Development Tools
@@ -17,7 +49,6 @@
 ### First Slide Deck: PDP - The Hidden Parts
 Created a 15-minute presentation about the Product Development Pipeline with:
 - **Aspect Ratio**: 16:9 (1920x1080)
-- **Frame Rate**: 30 fps
 - **Style**: Cyberpunk theme with neon colors (#ff006e pink, #00f5ff blue)
 - **Slides**:
   - Title slide with animated entrance
@@ -29,19 +60,12 @@ Created a 15-minute presentation about the Product Development Pipeline with:
   - Live Demos section
   - Thank you slide
 
-### Component Architecture
-Created reusable slide components:
-- `Slide.tsx`: Base container with background and styling
-- `TitleSlide.tsx`: Animated title slide with gradient text
-- `ContentSlide.tsx`: Bullet-point content with staggered animations
-- `SectionSlide.tsx`: Section dividers with scaling animations
-
 ### Key Features
-- Remotion-based video generation
-- Smooth animations using spring physics
+- ReactSlides-based presentation generation
 - Cyberpunk-inspired visual design
 - Modular, reusable component structure
 - Type-safe with strict TypeScript
+- Keyboard, touch, and mouse navigation support
 
 ### Project Structure
 ```
@@ -49,17 +73,14 @@ slide-decks/
 ├── apps/
 │   └── 2026-01-pdp-hidden-parts/    # First slide deck
 │       ├── src/
-│       │   ├── components/          # Slide components
-│       │   ├── Composition.tsx      # Main presentation
-│       │   ├── Root.tsx             # Remotion root
-│       │   └── index.ts             # Entry point
+│       │   ├── Composition.tsx      # Main presentation slides
+│       │   └── index.tsx            # Entry point with Presentation wrapper
 │       ├── package.json
-│       ├── tsconfig.json
-│       └── remotion.config.ts
+│       └── tsconfig.json
 ├── packages/
 │   └── core/                        # Shared dependencies
 │       ├── src/
-│       │   └── index.ts             # Re-exports Remotion
+│       │   └── index.ts             # Re-exports ReactSlides
 │       ├── package.json
 │       └── tsconfig.json
 ├── .github/
@@ -93,11 +114,8 @@ All packages use exact versions (no `^` or `~`):
   - vitest: 4.0.17
 
 - **Runtime Dependencies** (packages/core):
-  - @remotion/cli: 4.0.405
-  - @remotion/player: 4.0.405
+  - @reactslides/cli: 0.0.11
+  - @reactslides/core: 0.0.11
+  - @reactslides/shared-ui: 0.0.11
   - react: 19.2.3
   - react-dom: 19.2.3
-  - remotion: 4.0.405
-
-### Notes on Narro
-The original issue mentioned using "narro" (https://getnarro.com/get-started/), but this package was not found in the npm registry. The setup uses Remotion instead, which is the industry-standard tool for programmatic video/slide generation with React. The structure is designed to easily accommodate narro if/when it becomes available.

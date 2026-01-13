@@ -1,272 +1,768 @@
-import { AbsoluteFill, Sequence } from "@slide-decks/core";
+import {
+  ContentSlide as SharedContentSlide,
+  TitleSlide as SharedTitleSlide,
+  Slide,
+} from "@slide-decks/core";
 import type React from "react";
-import { ContentSlide } from "./components/ContentSlide";
-import { SectionSlide } from "./components/SectionSlide";
-import { TitleSlide } from "./components/TitleSlide";
 
 export const PDPPresentation: React.FC = () => {
-  // 30 fps, ~15 minutes = 27,000 frames total
-  // Allocate frames per slide type:
-  // - Title: 5 seconds = 150 frames
-  // - Section: 3 seconds = 90 frames
-  // - Content: 30-60 seconds = 900-1800 frames per topic
-
-  const fps = 30;
-  const titleDuration = fps * 5; // 5 seconds
-  const sectionDuration = fps * 3; // 3 seconds
-  const introSlideDuration = fps * 45; // 45 seconds
-  const contentSlideDuration = fps * 120; // 2 minutes per main content slide
-  const demoSlideDuration = fps * 180; // 3 minutes for demos
-  const outroSlideDuration = fps * 30; // 30 seconds
-
-  // Calculate frame positions for each sequence
-  const slides = [
-    { type: "title", duration: titleDuration },
-    { type: "intro", duration: introSlideDuration },
-    { type: "bpmn-section", duration: sectionDuration },
-    { type: "bpmn-workflow", duration: contentSlideDuration },
-    { type: "bpmn-how", duration: contentSlideDuration },
-    { type: "commands-section", duration: sectionDuration },
-    { type: "commands-system", duration: contentSlideDuration },
-    { type: "ai-section", duration: sectionDuration },
-    { type: "ai-powered", duration: contentSlideDuration },
-    { type: "ai-enhances", duration: contentSlideDuration },
-    { type: "practices-section", duration: sectionDuration },
-    { type: "practices-working", duration: contentSlideDuration },
-    { type: "practices-troubleshooting", duration: contentSlideDuration },
-    { type: "demos-section", duration: sectionDuration },
-    { type: "demos-creating", duration: demoSlideDuration },
-    { type: "demos-debugging", duration: demoSlideDuration },
-    { type: "outro", duration: outroSlideDuration },
-  ];
-
-  // Calculate cumulative frames
-  let framePosition = 0;
-  const slidePositions = slides.map((slide) => {
-    const start = framePosition;
-    framePosition += slide.duration;
-    return { ...slide, from: start };
-  });
-
-  // Extract individual slide positions for type safety
-  const [
-    titleSlide,
-    introSlide,
-    bpmnSectionSlide,
-    bpmnWorkflowSlide,
-    bpmnHowSlide,
-    commandsSectionSlide,
-    commandsSystemSlide,
-    aiSectionSlide,
-    aiPoweredSlide,
-    aiEnhancesSlide,
-    practicesSectionSlide,
-    practicesWorkingSlide,
-    practicesTroubleshootingSlide,
-    demosSectionSlide,
-    demosCreatingSlide,
-    demosDebuggingSlide,
-    outroSlide,
-  ] = slidePositions;
-
-  // Validate all slides are defined (should never fail with current configuration)
-  if (
-    !titleSlide ||
-    !introSlide ||
-    !bpmnSectionSlide ||
-    !bpmnWorkflowSlide ||
-    !bpmnHowSlide ||
-    !commandsSectionSlide ||
-    !commandsSystemSlide ||
-    !aiSectionSlide ||
-    !aiPoweredSlide ||
-    !aiEnhancesSlide ||
-    !practicesSectionSlide ||
-    !practicesWorkingSlide ||
-    !practicesTroubleshootingSlide ||
-    !demosSectionSlide ||
-    !demosCreatingSlide ||
-    !demosDebuggingSlide ||
-    !outroSlide
-  ) {
-    throw new Error("Missing slide positions");
-  }
+  // Cyberpunk colors
+  const neonPink = "#ff006e";
+  const neonBlue = "#00f5ff";
+  const darkBg = "#0a0e27";
 
   return (
-    <AbsoluteFill style={{ backgroundColor: "#0a0e27" }}>
+    <>
       {/* Title Slide */}
-      <Sequence from={titleSlide.from} durationInFrames={titleSlide.duration}>
-        <TitleSlide
-          title="PDP: the hidden parts"
-          subtitle="Understanding the Pipeline that Powers Product Development"
+      <Slide id="title" background={darkBg}>
+        <SharedTitleSlide
+          title={
+            <h1
+              style={{
+                fontSize: "120px",
+                fontWeight: "bold",
+                background: `linear-gradient(135deg, ${neonPink} 0%, ${neonBlue} 100%)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                margin: 0,
+                letterSpacing: "-2px",
+              }}
+            >
+              PDP: the hidden parts
+            </h1>
+          }
+          subtitle={
+            <p
+              style={{
+                fontSize: "48px",
+                color: "#8892b0",
+                marginTop: "40px",
+                fontWeight: 300,
+                lineHeight: 1.5,
+              }}
+            >
+              Understanding the Pipeline that Powers Product Development
+            </p>
+          }
         />
-      </Sequence>
+      </Slide>
 
       {/* Introduction */}
-      <Sequence from={introSlide.from} durationInFrames={introSlide.duration}>
-        <ContentSlide
-          title="What is PDP?"
-          bullets={[
-            "Product Development Pipeline automation",
-            "Connects Product Hub issues to systems",
-            "Powers the workflow behind the scenes",
-            "Most developers see only the surface",
-          ]}
-        />
-      </Sequence>
+      <Slide id="intro" background={darkBg}>
+        <SharedContentSlide
+          title={
+            <h2
+              style={{
+                fontSize: "80px",
+                fontWeight: "bold",
+                background: `linear-gradient(135deg, ${neonPink} 0%, ${neonBlue} 100%)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                margin: "0 0 60px 0",
+                letterSpacing: "-1px",
+              }}
+            >
+              What is PDP?
+            </h2>
+          }
+        >
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {[
+              "Product Development Pipeline automation",
+              "Connects Product Hub issues to systems",
+              "Powers the workflow behind the scenes",
+              "Most developers see only the surface",
+            ].map((bullet, index) => (
+              <li
+                key={index}
+                style={{
+                  fontSize: "48px",
+                  color: "#e6f1ff",
+                  marginBottom: "40px",
+                  display: "flex",
+                  alignItems: "center",
+                  lineHeight: 1.4,
+                }}
+              >
+                <span
+                  style={{
+                    color: neonPink,
+                    marginRight: "30px",
+                    fontSize: "32px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  ▸
+                </span>
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        </SharedContentSlide>
+      </Slide>
 
       {/* Section: BPMN Process */}
-      <Sequence from={bpmnSectionSlide.from} durationInFrames={bpmnSectionSlide.duration}>
-        <SectionSlide title="PDP BPMN Process" />
-      </Sequence>
+      <Slide id="bpmn-section" background={darkBg}>
+        <div style={{ textAlign: "center", maxWidth: "1400px", margin: "0 auto" }}>
+          <h1
+            style={{
+              fontSize: "100px",
+              fontWeight: "bold",
+              background: `linear-gradient(135deg, ${neonBlue} 0%, ${neonPink} 100%)`,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              margin: 0,
+              letterSpacing: "-1px",
+              textTransform: "uppercase",
+            }}
+          >
+            PDP BPMN Process
+          </h1>
+        </div>
+      </Slide>
 
-      <Sequence from={bpmnWorkflowSlide.from} durationInFrames={bpmnWorkflowSlide.duration}>
-        <ContentSlide
-          title="BPMN Workflow"
-          bullets={[
-            "Business Process Model and Notation",
-            "Orchestrates the entire pipeline",
-            "Handles state transitions automatically",
-            "Defines approval flows and gates",
-            "Connects to external systems",
-          ]}
-        />
-      </Sequence>
+      {/* BPMN Workflow */}
+      <Slide id="bpmn-workflow" background={darkBg}>
+        <SharedContentSlide
+          title={
+            <h2
+              style={{
+                fontSize: "80px",
+                fontWeight: "bold",
+                background: `linear-gradient(135deg, ${neonPink} 0%, ${neonBlue} 100%)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                margin: "0 0 60px 0",
+                letterSpacing: "-1px",
+              }}
+            >
+              BPMN Workflow
+            </h2>
+          }
+        >
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {[
+              "Business Process Model and Notation",
+              "Orchestrates the entire pipeline",
+              "Handles state transitions automatically",
+              "Defines approval flows and gates",
+              "Connects to external systems",
+            ].map((bullet, index) => (
+              <li
+                key={index}
+                style={{
+                  fontSize: "48px",
+                  color: "#e6f1ff",
+                  marginBottom: "40px",
+                  display: "flex",
+                  alignItems: "center",
+                  lineHeight: 1.4,
+                }}
+              >
+                <span
+                  style={{
+                    color: neonPink,
+                    marginRight: "30px",
+                    fontSize: "32px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  ▸
+                </span>
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        </SharedContentSlide>
+      </Slide>
 
-      <Sequence from={bpmnHowSlide.from} durationInFrames={bpmnHowSlide.duration}>
-        <ContentSlide
-          title="How BPMN Works"
-          bullets={[
-            "Visual workflow definition",
-            "Event-driven architecture",
-            "Parallel and sequential flows",
-            "Error handling and retries",
-            "Audit trail for compliance",
-          ]}
-        />
-      </Sequence>
+      {/* How BPMN Works */}
+      <Slide id="bpmn-how" background={darkBg}>
+        <SharedContentSlide
+          title={
+            <h2
+              style={{
+                fontSize: "80px",
+                fontWeight: "bold",
+                background: `linear-gradient(135deg, ${neonPink} 0%, ${neonBlue} 100%)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                margin: "0 0 60px 0",
+                letterSpacing: "-1px",
+              }}
+            >
+              How BPMN Works
+            </h2>
+          }
+        >
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {[
+              "Visual workflow definition",
+              "Event-driven architecture",
+              "Parallel and sequential flows",
+              "Error handling and retries",
+              "Audit trail for compliance",
+            ].map((bullet, index) => (
+              <li
+                key={index}
+                style={{
+                  fontSize: "48px",
+                  color: "#e6f1ff",
+                  marginBottom: "40px",
+                  display: "flex",
+                  alignItems: "center",
+                  lineHeight: 1.4,
+                }}
+              >
+                <span
+                  style={{
+                    color: neonPink,
+                    marginRight: "30px",
+                    fontSize: "32px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  ▸
+                </span>
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        </SharedContentSlide>
+      </Slide>
 
       {/* Section: PDP Commands */}
-      <Sequence from={commandsSectionSlide.from} durationInFrames={commandsSectionSlide.duration}>
-        <SectionSlide title="PDP Commands" />
-      </Sequence>
+      <Slide id="commands-section" background={darkBg}>
+        <div style={{ textAlign: "center", maxWidth: "1400px", margin: "0 auto" }}>
+          <h1
+            style={{
+              fontSize: "100px",
+              fontWeight: "bold",
+              background: `linear-gradient(135deg, ${neonBlue} 0%, ${neonPink} 100%)`,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              margin: 0,
+              letterSpacing: "-1px",
+              textTransform: "uppercase",
+            }}
+          >
+            PDP Commands
+          </h1>
+        </div>
+      </Slide>
 
-      <Sequence from={commandsSystemSlide.from} durationInFrames={commandsSystemSlide.duration}>
-        <ContentSlide
-          title="Command System"
-          bullets={[
-            "CLI and API interfaces",
-            "Create, update, query issues",
-            "Trigger workflows programmatically",
-            "Batch operations support",
-            "Integration with CI/CD pipelines",
-          ]}
-        />
-      </Sequence>
+      {/* Command System */}
+      <Slide id="commands-system" background={darkBg}>
+        <SharedContentSlide
+          title={
+            <h2
+              style={{
+                fontSize: "80px",
+                fontWeight: "bold",
+                background: `linear-gradient(135deg, ${neonPink} 0%, ${neonBlue} 100%)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                margin: "0 0 60px 0",
+                letterSpacing: "-1px",
+              }}
+            >
+              Command System
+            </h2>
+          }
+        >
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {[
+              "CLI and API interfaces",
+              "Create, update, query issues",
+              "Trigger workflows programmatically",
+              "Batch operations support",
+              "Integration with CI/CD pipelines",
+            ].map((bullet, index) => (
+              <li
+                key={index}
+                style={{
+                  fontSize: "48px",
+                  color: "#e6f1ff",
+                  marginBottom: "40px",
+                  display: "flex",
+                  alignItems: "center",
+                  lineHeight: 1.4,
+                }}
+              >
+                <span
+                  style={{
+                    color: neonPink,
+                    marginRight: "30px",
+                    fontSize: "32px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  ▸
+                </span>
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        </SharedContentSlide>
+      </Slide>
 
       {/* Section: Agentic AI Integration */}
-      <Sequence from={aiSectionSlide.from} durationInFrames={aiSectionSlide.duration}>
-        <SectionSlide title="Agentic AI Integration" />
-      </Sequence>
+      <Slide id="ai-section" background={darkBg}>
+        <div style={{ textAlign: "center", maxWidth: "1400px", margin: "0 auto" }}>
+          <h1
+            style={{
+              fontSize: "100px",
+              fontWeight: "bold",
+              background: `linear-gradient(135deg, ${neonBlue} 0%, ${neonPink} 100%)`,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              margin: 0,
+              letterSpacing: "-1px",
+              textTransform: "uppercase",
+            }}
+          >
+            Agentic AI Integration
+          </h1>
+        </div>
+      </Slide>
 
-      <Sequence from={aiPoweredSlide.from} durationInFrames={aiPoweredSlide.duration}>
-        <ContentSlide
-          title="AI-Powered Automation"
-          bullets={[
-            "Natural language processing for requirements",
-            "Automatic issue categorization",
-            "Smart routing based on content",
-            "Predictive analytics for timelines",
-            "Intelligent recommendations",
-          ]}
-        />
-      </Sequence>
+      {/* AI-Powered Automation */}
+      <Slide id="ai-powered" background={darkBg}>
+        <SharedContentSlide
+          title={
+            <h2
+              style={{
+                fontSize: "80px",
+                fontWeight: "bold",
+                background: `linear-gradient(135deg, ${neonPink} 0%, ${neonBlue} 100%)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                margin: "0 0 60px 0",
+                letterSpacing: "-1px",
+              }}
+            >
+              AI-Powered Automation
+            </h2>
+          }
+        >
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {[
+              "Natural language processing for requirements",
+              "Automatic issue categorization",
+              "Smart routing based on content",
+              "Predictive analytics for timelines",
+              "Intelligent recommendations",
+            ].map((bullet, index) => (
+              <li
+                key={index}
+                style={{
+                  fontSize: "48px",
+                  color: "#e6f1ff",
+                  marginBottom: "40px",
+                  display: "flex",
+                  alignItems: "center",
+                  lineHeight: 1.4,
+                }}
+              >
+                <span
+                  style={{
+                    color: neonPink,
+                    marginRight: "30px",
+                    fontSize: "32px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  ▸
+                </span>
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        </SharedContentSlide>
+      </Slide>
 
-      <Sequence from={aiEnhancesSlide.from} durationInFrames={aiEnhancesSlide.duration}>
-        <ContentSlide
-          title="How AI Enhances PDP"
-          bullets={[
-            "Reduces manual classification work",
-            "Learns from historical patterns",
-            "Suggests next steps automatically",
-            "Detects anomalies and risks",
-            "Improves over time with feedback",
-          ]}
-        />
-      </Sequence>
+      {/* How AI Enhances PDP */}
+      <Slide id="ai-enhances" background={darkBg}>
+        <SharedContentSlide
+          title={
+            <h2
+              style={{
+                fontSize: "80px",
+                fontWeight: "bold",
+                background: `linear-gradient(135deg, ${neonPink} 0%, ${neonBlue} 100%)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                margin: "0 0 60px 0",
+                letterSpacing: "-1px",
+              }}
+            >
+              How AI Enhances PDP
+            </h2>
+          }
+        >
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {[
+              "Reduces manual classification work",
+              "Learns from historical patterns",
+              "Suggests next steps automatically",
+              "Detects anomalies and risks",
+              "Improves over time with feedback",
+            ].map((bullet, index) => (
+              <li
+                key={index}
+                style={{
+                  fontSize: "48px",
+                  color: "#e6f1ff",
+                  marginBottom: "40px",
+                  display: "flex",
+                  alignItems: "center",
+                  lineHeight: 1.4,
+                }}
+              >
+                <span
+                  style={{
+                    color: neonPink,
+                    marginRight: "30px",
+                    fontSize: "32px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  ▸
+                </span>
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        </SharedContentSlide>
+      </Slide>
 
       {/* Section: Best Practices */}
-      <Sequence from={practicesSectionSlide.from} durationInFrames={practicesSectionSlide.duration}>
-        <SectionSlide title="Best Practices" />
-      </Sequence>
+      <Slide id="practices-section" background={darkBg}>
+        <div style={{ textAlign: "center", maxWidth: "1400px", margin: "0 auto" }}>
+          <h1
+            style={{
+              fontSize: "100px",
+              fontWeight: "bold",
+              background: `linear-gradient(135deg, ${neonBlue} 0%, ${neonPink} 100%)`,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              margin: 0,
+              letterSpacing: "-1px",
+              textTransform: "uppercase",
+            }}
+          >
+            Best Practices
+          </h1>
+        </div>
+      </Slide>
 
-      <Sequence from={practicesWorkingSlide.from} durationInFrames={practicesWorkingSlide.duration}>
-        <ContentSlide
-          title="Working with PDP"
-          bullets={[
-            "Write clear, structured issue descriptions",
-            "Use proper labels and metadata",
-            "Follow the defined workflow steps",
-            "Monitor notifications and updates",
-            "Leverage automation where possible",
-          ]}
-        />
-      </Sequence>
+      {/* Working with PDP */}
+      <Slide id="practices-working" background={darkBg}>
+        <SharedContentSlide
+          title={
+            <h2
+              style={{
+                fontSize: "80px",
+                fontWeight: "bold",
+                background: `linear-gradient(135deg, ${neonPink} 0%, ${neonBlue} 100%)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                margin: "0 0 60px 0",
+                letterSpacing: "-1px",
+              }}
+            >
+              Working with PDP
+            </h2>
+          }
+        >
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {[
+              "Write clear, structured issue descriptions",
+              "Use proper labels and metadata",
+              "Follow the defined workflow steps",
+              "Monitor notifications and updates",
+              "Leverage automation where possible",
+            ].map((bullet, index) => (
+              <li
+                key={index}
+                style={{
+                  fontSize: "48px",
+                  color: "#e6f1ff",
+                  marginBottom: "40px",
+                  display: "flex",
+                  alignItems: "center",
+                  lineHeight: 1.4,
+                }}
+              >
+                <span
+                  style={{
+                    color: neonPink,
+                    marginRight: "30px",
+                    fontSize: "32px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  ▸
+                </span>
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        </SharedContentSlide>
+      </Slide>
 
-      <Sequence
-        from={practicesTroubleshootingSlide.from}
-        durationInFrames={practicesTroubleshootingSlide.duration}
-      >
-        <ContentSlide
-          title="Troubleshooting Tips"
-          bullets={[
-            "Check BPMN workflow status",
-            "Review command execution logs",
-            "Verify permissions and access",
-            "Use dry-run mode for testing",
-            "Contact PDP team for complex issues",
-          ]}
-        />
-      </Sequence>
+      {/* Troubleshooting Tips */}
+      <Slide id="practices-troubleshooting" background={darkBg}>
+        <SharedContentSlide
+          title={
+            <h2
+              style={{
+                fontSize: "80px",
+                fontWeight: "bold",
+                background: `linear-gradient(135deg, ${neonPink} 0%, ${neonBlue} 100%)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                margin: "0 0 60px 0",
+                letterSpacing: "-1px",
+              }}
+            >
+              Troubleshooting Tips
+            </h2>
+          }
+        >
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {[
+              "Check BPMN workflow status",
+              "Review command execution logs",
+              "Verify permissions and access",
+              "Use dry-run mode for testing",
+              "Contact PDP team for complex issues",
+            ].map((bullet, index) => (
+              <li
+                key={index}
+                style={{
+                  fontSize: "48px",
+                  color: "#e6f1ff",
+                  marginBottom: "40px",
+                  display: "flex",
+                  alignItems: "center",
+                  lineHeight: 1.4,
+                }}
+              >
+                <span
+                  style={{
+                    color: neonPink,
+                    marginRight: "30px",
+                    fontSize: "32px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  ▸
+                </span>
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        </SharedContentSlide>
+      </Slide>
 
       {/* Section: Demos */}
-      <Sequence from={demosSectionSlide.from} durationInFrames={demosSectionSlide.duration}>
-        <SectionSlide title="Live Demos" />
-      </Sequence>
+      <Slide id="demos-section" background={darkBg}>
+        <div style={{ textAlign: "center", maxWidth: "1400px", margin: "0 auto" }}>
+          <h1
+            style={{
+              fontSize: "100px",
+              fontWeight: "bold",
+              background: `linear-gradient(135deg, ${neonBlue} 0%, ${neonPink} 100%)`,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              margin: 0,
+              letterSpacing: "-1px",
+              textTransform: "uppercase",
+            }}
+          >
+            Live Demos
+          </h1>
+        </div>
+      </Slide>
 
-      <Sequence from={demosCreatingSlide.from} durationInFrames={demosCreatingSlide.duration}>
-        <ContentSlide
-          title="Demo: Creating an Issue"
-          bullets={[
-            "Using the CLI to create a new issue",
-            "Watch BPMN workflow trigger",
-            "See AI classification in action",
-            "Track progress through pipeline",
-            "View final outcome",
-          ]}
-        />
-      </Sequence>
+      {/* Demo: Creating an Issue */}
+      <Slide id="demos-creating" background={darkBg}>
+        <SharedContentSlide
+          title={
+            <h2
+              style={{
+                fontSize: "80px",
+                fontWeight: "bold",
+                background: `linear-gradient(135deg, ${neonPink} 0%, ${neonBlue} 100%)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                margin: "0 0 60px 0",
+                letterSpacing: "-1px",
+              }}
+            >
+              Demo: Creating an Issue
+            </h2>
+          }
+        >
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {[
+              "Using the CLI to create a new issue",
+              "Watch BPMN workflow trigger",
+              "See AI classification in action",
+              "Track progress through pipeline",
+              "View final outcome",
+            ].map((bullet, index) => (
+              <li
+                key={index}
+                style={{
+                  fontSize: "48px",
+                  color: "#e6f1ff",
+                  marginBottom: "40px",
+                  display: "flex",
+                  alignItems: "center",
+                  lineHeight: 1.4,
+                }}
+              >
+                <span
+                  style={{
+                    color: neonPink,
+                    marginRight: "30px",
+                    fontSize: "32px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  ▸
+                </span>
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        </SharedContentSlide>
+      </Slide>
 
-      <Sequence from={demosDebuggingSlide.from} durationInFrames={demosDebuggingSlide.duration}>
-        <ContentSlide
-          title="Demo: Debugging a Workflow"
-          bullets={[
-            "Access BPMN workflow dashboard",
-            "Trace execution path",
-            "Identify bottlenecks",
-            "Check integration points",
-            "Review error logs",
-          ]}
-        />
-      </Sequence>
+      {/* Demo: Debugging a Workflow */}
+      <Slide id="demos-debugging" background={darkBg}>
+        <SharedContentSlide
+          title={
+            <h2
+              style={{
+                fontSize: "80px",
+                fontWeight: "bold",
+                background: `linear-gradient(135deg, ${neonPink} 0%, ${neonBlue} 100%)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                margin: "0 0 60px 0",
+                letterSpacing: "-1px",
+              }}
+            >
+              Demo: Debugging a Workflow
+            </h2>
+          }
+        >
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {[
+              "Access BPMN workflow dashboard",
+              "Trace execution path",
+              "Identify bottlenecks",
+              "Check integration points",
+              "Review error logs",
+            ].map((bullet, index) => (
+              <li
+                key={index}
+                style={{
+                  fontSize: "48px",
+                  color: "#e6f1ff",
+                  marginBottom: "40px",
+                  display: "flex",
+                  alignItems: "center",
+                  lineHeight: 1.4,
+                }}
+              >
+                <span
+                  style={{
+                    color: neonPink,
+                    marginRight: "30px",
+                    fontSize: "32px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  ▸
+                </span>
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        </SharedContentSlide>
+      </Slide>
 
       {/* Outro */}
-      <Sequence from={outroSlide.from} durationInFrames={outroSlide.duration}>
-        <ContentSlide
-          title="Thank You!"
-          bullets={["Questions?", "Let's pop the hood together", "PDP team is here to help"]}
-        />
-      </Sequence>
-    </AbsoluteFill>
+      <Slide id="outro" background={darkBg}>
+        <SharedContentSlide
+          title={
+            <h2
+              style={{
+                fontSize: "80px",
+                fontWeight: "bold",
+                background: `linear-gradient(135deg, ${neonPink} 0%, ${neonBlue} 100%)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                margin: "0 0 60px 0",
+                letterSpacing: "-1px",
+              }}
+            >
+              Thank You!
+            </h2>
+          }
+        >
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {["Questions?", "Let's pop the hood together", "PDP team is here to help"].map(
+              (bullet, index) => (
+                <li
+                  key={index}
+                  style={{
+                    fontSize: "48px",
+                    color: "#e6f1ff",
+                    marginBottom: "40px",
+                    display: "flex",
+                    alignItems: "center",
+                    lineHeight: 1.4,
+                  }}
+                >
+                  <span
+                    style={{
+                      color: neonPink,
+                      marginRight: "30px",
+                      fontSize: "32px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    ▸
+                  </span>
+                  <span>{bullet}</span>
+                </li>
+              )
+            )}
+          </ul>
+        </SharedContentSlide>
+      </Slide>
+    </>
   );
 };

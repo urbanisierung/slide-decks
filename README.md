@@ -1,6 +1,6 @@
 # Slide Decks
 
-A monorepo for generating programmatic slide decks with Remotion, organized by date for easy ordering.
+A monorepo for generating programmatic slide decks with ReactSlides, organized by date for easy ordering.
 
 ## Quick Start
 
@@ -25,7 +25,7 @@ slide-decks/
 ├── apps/                           # Individual slide decks (named yyyy-mm-*)
 │   └── 2026-01-pdp-hidden-parts/  # Example: PDP presentation
 ├── packages/
-│   └── core/                       # Shared dependencies (React, Remotion)
+│   └── core/                       # Shared dependencies (React, ReactSlides)
 └── .github/instructions/           # Development guidelines
 ```
 
@@ -33,7 +33,7 @@ slide-decks/
 
 - **Node.js 20+** with pnpm workspaces
 - **TypeScript** (strict mode)
-- **Remotion** for video generation
+- **ReactSlides** for slide generation
 - **React 19+** with functional components
 - **Biome.js** for linting and formatting
 - **Turbo** for monorepo build orchestration
@@ -53,31 +53,30 @@ A 15-minute presentation about the Product Development Pipeline automation syste
 
 1. Create a new app directory with date prefix:
    ```bash
-   mkdir -p apps/yyyy-mm-my-presentation/src/components
+   mkdir -p apps/yyyy-mm-my-presentation/src
    ```
 
 2. Copy structure from an existing deck:
    - `package.json`
    - `tsconfig.json`
-   - `remotion.config.ts`
-   - `src/index.ts`
-   - `src/Root.tsx`
+   - `src/index.tsx`
    - `src/Composition.tsx`
 
-3. Customize your slides using the component library.
+3. Customize your slides using ReactSlides components.
 
 ### Component Library
 
-Located in each app's `src/components/`:
-- **Slide**: Base container with background styling
-- **TitleSlide**: Animated title with subtitle
-- **ContentSlide**: Bullet points with animations
-- **SectionSlide**: Section dividers
+ReactSlides provides:
+- **Slide**: Container for individual slides
+- **TitleSlide**: Title slides with subtitle, author, date
+- **ContentSlide**: Content slides with titles and children
+- **TwoColumn**: Two-column layout component
+- **Motion**: Animation components for smooth transitions
 
 ### Running Slide Decks
 
 ```bash
-# Development mode (opens Remotion Studio)
+# Development mode (opens ReactSlides Studio)
 pnpm dev --filter @slide-decks/yyyy-mm-my-presentation
 
 # Render to video
