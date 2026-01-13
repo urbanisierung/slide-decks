@@ -5,14 +5,17 @@
   "private": true,
   "description": "PDP: the hidden parts - Slide deck presentation",
   "scripts": {
-    "dev": "reactslides dev src/index.tsx",
-    "render": "reactslides render src/index.tsx PDPPresentation out/pdp-presentation.mp4",
+    "dev": "reactslides dev",
+    "render": "reactslides export --pdf -o out",
     "build": "tsc --noEmit",
     "check": "tsc --noEmit",
     "test": "echo 'No tests yet'",
     "clean": "rm -rf out"
   },
   "dependencies": {
-    "@slide-decks/core": "workspace:*"
+    "@reactslides/cli": "0.0.11",
+    "@slide-decks/core": "workspace:*",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
   }
 }
