@@ -7,6 +7,7 @@ import {
 } from "@slide-decks/core";
 import type React from "react";
 import handlePdpSvg from "./img/handle-pdp.svg";
+import getCOnfigFromGirhub from "./img/get-config-from-github.svg";
 
 export const PDPPresentation: React.FC = () => {
   // Cyberpunk colors
@@ -53,7 +54,7 @@ export const PDPPresentation: React.FC = () => {
 
       {/* Introduction */}
       <Slide id="intro" background="#ffffff">
-        <MotionSteps totalSteps={3}>
+        <MotionSteps totalSteps={6}>
           <div
             style={{
               display: "flex",
@@ -62,13 +63,17 @@ export const PDPPresentation: React.FC = () => {
               width: "100%",
               height: "100%",
               overflow: "hidden",
+              position: "relative",
             }}
           >
             <MotionTransform
               transforms={[
-                { scale: 1, x: 0, y: 0 },
-                { scale: 2.5, x: 1100, y: 300 },
-                { scale: 2.5, x: 700, y: 300 },
+                { scale: 1, x: 0, y: 0, opacity: 1 },
+                { scale: 2.5, x: 1100, y: 300, opacity: 1 },
+                { scale: 2.5, x: 1100, y: 300, opacity: 0 },
+                { scale: 2.5, x: 1100, y: 300, opacity: 0 },
+                { scale: 2.5, x: 1100, y: 300, opacity: 0 },
+                { scale: 2.5, x: 700, y: 300, opacity: 1 },
               ]}
               duration={1}
               easing="backOut"
@@ -82,6 +87,116 @@ export const PDPPresentation: React.FC = () => {
                 }}
               />
             </MotionTransform>
+            {/* Detail BPMN */}
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              <MotionTransform
+                transforms={[
+                  { scale: 0, x: 0, y: 0, opacity: 0 },
+                  { scale: 0, x: 0, y: 0, opacity: 0 },
+                  { scale: 2, x: 0, y: 0, opacity: 1 },
+                  { scale: 2, x: 0, y: 0, opacity: 0 },
+                  { scale: 2, x: 0, y: 0, opacity: 0 },
+                  { scale: 2, x: 0, y: 0, opacity: 0 },
+                ]}
+                duration={1}
+                easing="backOut"
+              >
+                <img
+                  src={getCOnfigFromGirhub}
+                  alt="PDP BPMN Process Detail"
+                  style={{
+                    width: "1600px",
+                    height: "1000px",
+                  }}
+                />
+              </MotionTransform>
+            </div>
+            {/* Commands and FEEL Expression Boxes */}
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                display: "flex",
+                gap: "40px",
+              }}
+            >
+              <MotionTransform
+                transforms={[
+                  { scale: 0, x: 0, y: 0, opacity: 0 },
+                  { scale: 0, x: 0, y: 0, opacity: 0 },
+                  { scale: 0, x: 0, y: 0, opacity: 0 },
+                  { scale: 1, x: 0, y: 0, opacity: 1 },
+                  { scale: 1, x: 0, y: 0, opacity: 0 },
+                  { scale: 0, x: 0, y: 0, opacity: 0 },
+                ]}
+                duration={1}
+                easing="backOut"
+              >
+                <div style={{ display: "flex", gap: "40px" }}>
+                  {/* Left Box - Commands */}
+                  <div
+                    style={{
+                      background: "#1e1e1e",
+                      borderRadius: "12px",
+                      padding: "40px",
+                      fontFamily: "monospace",
+                      fontSize: "24px",
+                      lineHeight: 1.8,
+                      color: "#9cdcfe",
+                      boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+                    }}
+                  >
+                    <pre style={{ margin: 0 }}>
+                      {`COMMAND_NEXT_PHASE=!pdp next
+COMMAND_DESIGN_LINK=!pdp design
+COMMAND_MIGRATE=!pdp migrate
+COMMAND_SLACK=!pdp slack
+COMMAND_PROGRESS=!pdp progress
+COMMAND_PAUSE=!pdp pause
+COMMAND_CONTINUE=!pdp continue
+COMMAND_RESTART=!pdp restart-check
+COMMAND_AI_REVIEW=!pdp review
+COMMAND_PREFIX=!pdp
+...`}
+                    </pre>
+                  </div>
+
+                  {/* Right Box - FEEL Expression */}
+                  <div
+                    style={{
+                      background: "#1e1e1e",
+                      borderRadius: "12px",
+                      padding: "40px",
+                      fontFamily: "monospace",
+                      fontSize: "24px",
+                      lineHeight: 1.8,
+                      color: "#ce9178",
+                      boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+                    }}
+                  >
+                    <pre style={{ margin: 0 }}>
+                      {`context merge(
+  for entry in
+    (for kvPair in
+      (for kvPair in split(rawContent, "\\n") return kvPair)
+    return split(kvPair, "="))
+  return
+    context put({}, entry[1], entry[2])
+)`}
+                    </pre>
+                  </div>
+                </div>
+              </MotionTransform>
+            </div>
           </div>
         </MotionSteps>
       </Slide>
