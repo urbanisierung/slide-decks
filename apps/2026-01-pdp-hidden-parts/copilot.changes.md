@@ -53,3 +53,29 @@ The `pnpm dev` command was failing with errors:
 ### Result
 
 The `pnpm dev` command now successfully starts the development server at http://localhost:3000
+
+---
+
+## Fix: Improve BPMN Intro Slide Readability and Zoom
+
+**Date**: January 20, 2026
+
+### Problem
+
+The second slide (id="intro") with the embedded BPMN XML had poor readability due to dark background, and the zoom effect was not targeting the first quarter of the BPMN diagram.
+
+### Changes Made
+
+#### 1. Changed Background Color to White
+- **File**: [apps/2026-01-pdp-hidden-parts/src/Composition.tsx](apps/2026-01-pdp-hidden-parts/src/Composition.tsx)
+- **Change**: Changed `background={darkBg}` to `background="#ffffff"` for the intro slide
+- **Reason**: The BPMN diagram was barely readable on the dark cyberpunk background
+
+#### 2. Adjusted Zoom Transform to Target First Quarter
+- **File**: [apps/2026-01-pdp-hidden-parts/src/Composition.tsx](apps/2026-01-pdp-hidden-parts/src/Composition.tsx)
+- **Change**: Updated MotionTransform from `{ scale: 2.5, x: 350, y: 0 }` to `{ scale: 2.5, x: 600, y: 400 }`
+- **Reason**: To zoom into the top-left (first quarter) of the BPMN diagram, positive x and y values move the image right and down, making the top-left area visible in the center
+
+### Result
+
+The intro slide now displays the BPMN diagram on a white background for better readability, and the zoom animation focuses on the first quarter of the diagram.

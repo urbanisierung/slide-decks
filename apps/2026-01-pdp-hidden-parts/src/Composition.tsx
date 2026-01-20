@@ -52,8 +52,8 @@ export const PDPPresentation: React.FC = () => {
       </Slide>
 
       {/* Introduction */}
-      <Slide id="intro" background={darkBg}>
-        <MotionSteps totalSteps={2}>
+      <Slide id="intro" background="#ffffff">
+        <MotionSteps totalSteps={3}>
           <div
             style={{
               display: "flex",
@@ -67,7 +67,8 @@ export const PDPPresentation: React.FC = () => {
             <MotionTransform
               transforms={[
                 { scale: 1, x: 0, y: 0 },
-                { scale: 2.5, x: 350, y: 0 },
+                { scale: 2.5, x: 1100, y: 300 },
+                { scale: 2.5, x: 700, y: 300 },
               ]}
               duration={1}
               easing="backOut"
@@ -77,7 +78,7 @@ export const PDPPresentation: React.FC = () => {
                 alt="PDP BPMN Process"
                 style={{
                   width: "1600px",
-                  height: "auto",
+                  height: "1000px",
                 }}
               />
             </MotionTransform>
