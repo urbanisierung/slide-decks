@@ -7,7 +7,7 @@ import {
 } from "@slide-decks/core";
 import type React from "react";
 import handlePdpSvg from "./img/handle-pdp.svg";
-import getCOnfigFromGirhub from "./img/get-config-from-github.svg";
+import getConfigFromGithub from "./img/get-config-from-github.svg";
 
 export const PDPPresentation: React.FC = () => {
   // Cyberpunk colors
@@ -54,7 +54,7 @@ export const PDPPresentation: React.FC = () => {
 
       {/* Introduction */}
       <Slide id="intro" background="#ffffff">
-        <MotionSteps totalSteps={6}>
+        <MotionSteps totalSteps={8}>
           <div
             style={{
               display: "flex",
@@ -74,6 +74,8 @@ export const PDPPresentation: React.FC = () => {
                 { scale: 2.5, x: 1100, y: 300, opacity: 0 },
                 { scale: 2.5, x: 1100, y: 300, opacity: 0 },
                 { scale: 2.5, x: 700, y: 300, opacity: 1 },
+                { scale: 2, x: -500, y: 100, opacity: 1 },
+                { scale: 1, x: 0, y: 0, opacity: 1 },
               ]}
               duration={1}
               easing="backOut"
@@ -91,7 +93,7 @@ export const PDPPresentation: React.FC = () => {
             <div
               style={{
                 position: "absolute",
-                top: "50%",
+                top: "20%",
                 left: "50%",
                 transform: "translate(-50%, -50%)",
               }}
@@ -102,14 +104,14 @@ export const PDPPresentation: React.FC = () => {
                   { scale: 0, x: 0, y: 0, opacity: 0 },
                   { scale: 2, x: 0, y: 0, opacity: 1 },
                   { scale: 2, x: 0, y: 0, opacity: 0 },
-                  { scale: 2, x: 0, y: 0, opacity: 0 },
+                  { scale: 2, x: 0, y: 0, opacity: 1 },
                   { scale: 2, x: 0, y: 0, opacity: 0 },
                 ]}
                 duration={1}
                 easing="backOut"
               >
                 <img
-                  src={getCOnfigFromGirhub}
+                  src={getConfigFromGithub}
                   alt="PDP BPMN Process Detail"
                   style={{
                     width: "1600px",
