@@ -93,8 +93,8 @@ export const PDPPresentation: React.FC = () => {
             <div
               style={{
                 position: "absolute",
-                top: "20%",
-                left: "50%",
+                top: "40%",
+                left: "40%",
                 transform: "translate(-50%, -50%)",
               }}
             >
@@ -102,10 +102,10 @@ export const PDPPresentation: React.FC = () => {
                 transforms={[
                   { scale: 0, x: 0, y: 0, opacity: 0 },
                   { scale: 0, x: 0, y: 0, opacity: 0 },
-                  { scale: 2, x: 0, y: 0, opacity: 1 },
-                  { scale: 2, x: 0, y: 0, opacity: 0 },
-                  { scale: 2, x: 0, y: 0, opacity: 1 },
-                  { scale: 2, x: 0, y: 0, opacity: 0 },
+                  { scale: 1.5, x: 0, y: 0, opacity: 1 },
+                  { scale: 1.5, x: 0, y: 0, opacity: 0 },
+                  { scale: 1.5, x: 0, y: 0, opacity: 1 },
+                  { scale: 1.5, x: 0, y: 0, opacity: 0 },
                 ]}
                 duration={1}
                 easing="backOut"
