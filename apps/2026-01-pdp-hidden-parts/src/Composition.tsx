@@ -19,22 +19,136 @@ export const PDPPresentation: React.FC = () => {
     <>
       {/* Title Slide */}
       <Slide id="title" background={darkBg}>
+        <style>
+          {`
+            @keyframes glitch-cyan {
+              0%, 100% { transform: translate(-4px, 2px); opacity: 0.8; }
+              10% { transform: translate(-6px, 0px); opacity: 0.9; }
+              20% { transform: translate(-2px, 3px); opacity: 0.7; }
+              30% { transform: translate(-8px, -1px); opacity: 0.85; }
+              40% { transform: translate(-3px, 2px); opacity: 0.75; }
+              50% { transform: translate(-5px, 4px); opacity: 0.9; }
+              60% { transform: translate(-1px, 1px); opacity: 0.8; }
+              70% { transform: translate(-7px, 0px); opacity: 0.85; }
+              80% { transform: translate(-4px, 3px); opacity: 0.7; }
+              90% { transform: translate(-2px, 1px); opacity: 0.9; }
+            }
+            @keyframes glitch-pink {
+              0%, 100% { transform: translate(4px, -2px); opacity: 0.8; }
+              10% { transform: translate(2px, -4px); opacity: 0.7; }
+              20% { transform: translate(6px, 0px); opacity: 0.85; }
+              30% { transform: translate(3px, -3px); opacity: 0.9; }
+              40% { transform: translate(7px, -1px); opacity: 0.75; }
+              50% { transform: translate(1px, -2px); opacity: 0.8; }
+              60% { transform: translate(5px, -5px); opacity: 0.9; }
+              70% { transform: translate(2px, 0px); opacity: 0.7; }
+              80% { transform: translate(8px, -2px); opacity: 0.85; }
+              90% { transform: translate(4px, -4px); opacity: 0.8; }
+            }
+            @keyframes glitch-clip-top {
+              0%, 100% { clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); }
+              25% { clip-path: polygon(0 5%, 100% 0, 100% 40%, 0 50%); }
+              50% { clip-path: polygon(0 0, 100% 10%, 100% 50%, 0 40%); }
+              75% { clip-path: polygon(0 8%, 100% 0, 100% 42%, 0 48%); }
+            }
+            @keyframes glitch-clip-bottom {
+              0%, 100% { clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%); }
+              25% { clip-path: polygon(0 50%, 100% 60%, 100% 100%, 0 95%); }
+              50% { clip-path: polygon(0 60%, 100% 52%, 100% 95%, 0 100%); }
+              75% { clip-path: polygon(0 52%, 100% 58%, 100% 100%, 0 98%); }
+            }
+            @keyframes glitch-skew {
+              0%, 100% { transform: skewX(0deg); }
+              20% { transform: skewX(-1deg); }
+              40% { transform: skewX(1deg); }
+              60% { transform: skewX(-0.5deg); }
+              80% { transform: skewX(0.5deg); }
+            }
+          `}
+        </style>
         <SharedTitleSlide
           title={
-            <h1
+            <div
               style={{
-                fontSize: "120px",
-                fontWeight: "bold",
-                background: `linear-gradient(135deg, ${neonPink} 0%, ${neonBlue} 100%)`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                margin: 0,
-                letterSpacing: "-2px",
+                position: "relative",
+                display: "inline-block",
+                animation: "glitch-skew 4s infinite ease-in-out",
               }}
             >
-              PDP: the hidden parts
-            </h1>
+              {/* Glitch layer - cyan offset */}
+              {/** biome-ignore lint/a11y/useHeadingContent: <explanation> */}
+              <h1
+                style={{
+                  fontSize: "120px",
+                  fontWeight: "900",
+                  color: neonBlue,
+                  margin: 0,
+                  letterSpacing: "-2px",
+                  position: "absolute",
+                  left: 0,
+                  top: 0,
+                  opacity: 0.8,
+                  textTransform: "uppercase",
+                  animation: "glitch-cyan 2.5s infinite linear, glitch-clip-top 3s infinite ease-in-out",
+                }}
+                aria-hidden="true"
+              >
+                PDP: the hidden parts
+              </h1>
+              {/* Glitch layer - pink offset */}
+              {/** biome-ignore lint/a11y/useHeadingContent: <explanation> */}
+              <h1
+                style={{
+                  fontSize: "120px",
+                  fontWeight: "900",
+                  color: neonPink,
+                  margin: 0,
+                  letterSpacing: "-2px",
+                  position: "absolute",
+                  left: 0,
+                  top: 0,
+                  opacity: 0.8,
+                  textTransform: "uppercase",
+                  animation: "glitch-pink 2s infinite linear, glitch-clip-bottom 2.5s infinite ease-in-out",
+                }}
+                aria-hidden="true"
+              >
+                PDP: the hidden parts
+              </h1>
+              {/* Main title */}
+              <h1
+                style={{
+                  fontSize: "120px",
+                  fontWeight: "900",
+                  color: "#ffffff",
+                  margin: 0,
+                  letterSpacing: "-2px",
+                  position: "relative",
+                  textTransform: "uppercase",
+                  textShadow: `
+                    2px 0 ${neonPink}, 
+                    -2px 0 ${neonBlue},
+                    0 0 20px rgba(255, 0, 110, 0.5),
+                    0 0 40px rgba(0, 245, 255, 0.3)
+                  `,
+                }}
+              >
+                PDP: the hidden parts
+              </h1>
+              {/* Scan line overlay */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background:
+                    "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.1) 2px, rgba(0, 0, 0, 0.1) 4px)",
+                  pointerEvents: "none",
+                }}
+              />
+            </div>
           }
           subtitle={
             <p

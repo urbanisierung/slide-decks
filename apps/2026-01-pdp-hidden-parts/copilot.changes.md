@@ -1,5 +1,39 @@
 # Copilot Changes
 
+## Enhancement: Brutalism Glitch Effect for Title Slide
+
+**Date**: January 22, 2026
+
+### Changes Made
+
+#### Title Slide Visual Enhancement
+- **File**: [apps/2026-01-pdp-hidden-parts/src/Composition.tsx](src/Composition.tsx#L22-L89)
+- **Reason**: User requested a brutalism glitch effect for the title slide
+
+#### Visual Effect Details
+- Added layered text with RGB color separation (cyan and pink offset layers)
+- Used `clipPath` to create split/distorted text appearance
+- Added text shadow with neon glow effect
+- Applied scan line overlay for retro CRT aesthetic
+- Changed text to uppercase for bold brutalist typography
+- Increased font weight to 900 for heavier impact
+
+#### Animation (Added)
+- **`glitch-cyan`**: Animates the cyan layer with random-looking position offsets and opacity changes
+- **`glitch-pink`**: Animates the pink layer with different timing for visual separation
+- **`glitch-clip-top`**: Morphs the top clip-path for a distorted slice effect
+- **`glitch-clip-bottom`**: Morphs the bottom clip-path independently
+- **`glitch-skew`**: Adds subtle skew to the entire title container
+
+#### Technique
+- Main white text layer with colored text-shadow glow
+- Cyan layer with position animation + clip-path animation (2.5s + 3s cycles)
+- Pink layer with position animation + clip-path animation (2s + 2.5s cycles)
+- Container has subtle skew animation (4s cycle)
+- Different timing creates organic, unpredictable glitch feeling
+
+---
+
 ## Fix: Dev Command Not Working in `apps/2026-01-pdp-hidden-parts`
 
 **Date**: January 13, 2026
