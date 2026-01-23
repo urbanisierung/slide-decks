@@ -13,6 +13,105 @@ import commentSvg from "./img/comment.svg";
 import commentNextPhaseSvg from "./img/comment-next-phase.svg";
 import regularPhaseCheckSvg from "./img/regular-phase-check.svg";
 import projectFieldsPng from "./img/project-fields.png";
+import thanks2Svg from "./img/thanks2.svg";
+
+// Translations for "Thanks!"
+const thanksTranslations = [
+  "Thanks!",      // English
+  "Danke!",       // German
+  "¡Gracias!",    // Spanish
+  "Merci!",       // French
+  "Dziękuję!",    // Polish
+  "Grazie!",      // Italian
+  "Ευχαριστώ!",   // Greek
+  "Obrigado!",    // Brazilian Portuguese
+];
+
+const RotatingThanks: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isGlitching, setIsGlitching] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsGlitching(true);
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % thanksTranslations.length);
+        setIsGlitching(false);
+      }, 200);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const currentText = thanksTranslations[currentIndex];
+
+  return (
+    <div
+      style={{
+        position: "relative",
+        display: "inline-block",
+        animation: isGlitching ? "glitch-skew 0.2s ease-in-out" : "glitch-skew 4s infinite ease-in-out",
+      }}
+    >
+      {/* Glitch layer - cyan offset */}
+      <span
+        style={{
+          fontSize: "96px",
+          fontWeight: "900",
+          color: neonBlue,
+          position: "absolute",
+          left: 0,
+          top: 0,
+          opacity: 0.8,
+          textTransform: "uppercase",
+          animation: isGlitching
+            ? "glitch-cyan 0.1s linear infinite"
+            : "glitch-cyan 2.5s infinite linear, glitch-clip-top 3s infinite ease-in-out",
+        }}
+        aria-hidden="true"
+      >
+        {currentText}
+      </span>
+      {/* Glitch layer - pink offset */}
+      <span
+        style={{
+          fontSize: "96px",
+          fontWeight: "900",
+          color: neonPink,
+          position: "absolute",
+          left: 0,
+          top: 0,
+          opacity: 0.8,
+          textTransform: "uppercase",
+          animation: isGlitching
+            ? "glitch-pink 0.1s linear infinite"
+            : "glitch-pink 2s infinite linear, glitch-clip-bottom 2.5s infinite ease-in-out",
+        }}
+        aria-hidden="true"
+      >
+        {currentText}
+      </span>
+      {/* Main text */}
+      <span
+        style={{
+          fontSize: "96px",
+          fontWeight: "900",
+          color: "#ffffff",
+          position: "relative",
+          textTransform: "uppercase",
+          textShadow: `
+            2px 0 ${neonPink}, 
+            -2px 0 ${neonBlue},
+            0 0 20px rgba(255, 0, 110, 0.5),
+            0 0 40px rgba(0, 245, 255, 0.3)
+          `,
+        }}
+      >
+        {currentText}
+      </span>
+    </div>
+  );
+};
 
 interface MermaidDiagramProps {
   chart: string;
@@ -852,6 +951,45 @@ flowchart LR
               content
             );
           })}
+        </div>
+      </Slide>
+
+      {/* Final Thank You Slide */}
+      <Slide id="thanks" background={darkBg}>
+        <style>
+          {`
+            ${glitchStyles}
+            @keyframes purple-glow {
+              0%, 100% {
+                filter: drop-shadow(0 0 20px rgba(180, 130, 255, 0.6)) drop-shadow(0 0 40px rgba(180, 130, 255, 0.4)) drop-shadow(0 0 60px rgba(180, 130, 255, 0.2));
+              }
+              50% {
+                filter: drop-shadow(0 0 30px rgba(180, 130, 255, 0.8)) drop-shadow(0 0 60px rgba(180, 130, 255, 0.5)) drop-shadow(0 0 90px rgba(180, 130, 255, 0.3));
+              }
+            }
+          `}
+        </style>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+            height: "100%",
+            gap: "60px",
+          }}
+        >
+          <img
+            src={thanks2Svg}
+            alt="Thanks"
+            style={{
+              width: "1500px",
+              height: "auto",
+              animation: "purple-glow 3s ease-in-out infinite",
+            }}
+          />
+          <RotatingThanks />
         </div>
       </Slide>
     </>
