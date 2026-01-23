@@ -619,7 +619,7 @@ COMMAND_PREFIX=!pdp
 
       {/* Housekeeping Diagram Slide */}
       <Slide id="housekeeping-diagram" background="#ffffff">
-        <MotionSteps totalSteps={2}>
+        <MotionSteps totalSteps={6}>
           <div
             style={{
               display: "flex",
@@ -634,7 +634,11 @@ COMMAND_PREFIX=!pdp
             <MotionTransform
               transforms={[
                 { scale: 1, x: 0, y: 0, opacity: 1 },
-                { scale: 2.5, x: 0, y: 0, opacity: 1 },
+                { scale: 2.5, x: 1000, y: -800, opacity: 1 },
+                { scale: 2.5, x: -900, y: -800, opacity: 1 },
+                { scale: 2.5, x: -900, y: 0, opacity: 1 },
+                { scale: 2.5, x: -900, y: 400, opacity: 1 },
+                { scale: 2.5, x: -900, y: 800, opacity: 1 },
               ]}
               duration={1}
               easing="backOut"
