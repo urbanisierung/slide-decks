@@ -4,12 +4,104 @@ import {
   MotionSteps,
   MotionTransform,
 } from "@slide-decks/core";
+import { useEffect, useRef, useState } from "react";
 import type React from "react";
+import mermaid from "mermaid";
 import handlePdpSvg from "./img/handle-pdp.svg";
 import getConfigFromGithub from "./img/get-config-from-github.svg";
 import commentSvg from "./img/comment.svg";
 import commentNextPhaseSvg from "./img/comment-next-phase.svg";
 import regularPhaseCheckSvg from "./img/regular-phase-check.svg";
+
+interface MermaidDiagramProps {
+  chart: string;
+  id: string;
+}
+
+const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ chart, id }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [error, setError] = useState<string | undefined>(undefined);
+  const hasRendered = useRef(false);
+
+  useEffect(() => {
+    // Prevent double rendering in strict mode
+    if (hasRendered.current) return;
+
+    const renderDiagram = async () => {
+      if (!containerRef.current) return;
+
+      try {
+        // Initialize mermaid for each render to ensure clean state
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: "dark",
+          themeVariables: {
+            primaryColor: "#ff006e",
+            primaryTextColor: "#ffffff",
+            primaryBorderColor: "#00f5ff",
+            lineColor: "#00f5ff",
+            secondaryColor: "#0a0e27",
+            tertiaryColor: "#1a1e3a",
+            background: "#0a0e27",
+            mainBkg: "#1a1e3a",
+            nodeBorder: "#00f5ff",
+            clusterBkg: "#1a1e3a",
+            clusterBorder: "#ff006e",
+            titleColor: "#ffffff",
+            edgeLabelBackground: "#0a0e27",
+          },
+          flowchart: {
+            curve: "basis",
+            padding: 20,
+          },
+        });
+
+        // Generate unique ID to avoid conflicts
+        const uniqueId = `mermaid-${id}-${Date.now()}`;
+        const { svg } = await mermaid.render(uniqueId, chart.trim());
+        if (containerRef.current) {
+          containerRef.current.innerHTML = svg;
+          // Scale SVG to fit container
+          const svgElement = containerRef.current.querySelector("svg");
+          if (svgElement) {
+            svgElement.style.maxWidth = "100%";
+            svgElement.style.maxHeight = "100%";
+            svgElement.style.width = "auto";
+            svgElement.style.height = "auto";
+          }
+        }
+        hasRendered.current = true;
+      } catch (err) {
+        console.error("Mermaid render error:", err);
+        setError(err instanceof Error ? err.message : String(err));
+      }
+    };
+
+    renderDiagram();
+  }, [chart, id]);
+
+  if (error) {
+    return (
+      <div style={{ color: "#ff006e", padding: "20px", fontFamily: "monospace" }}>
+        Mermaid Error: {error}
+      </div>
+    );
+  }
+
+  return (
+    <div
+      ref={containerRef}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        height: "100%",
+        padding: "40px",
+      }}
+    />
+  );
+};
 
 // Cyberpunk colors
 const neonPink = "#ff006e";
@@ -450,6 +542,47 @@ COMMAND_PREFIX=!pdp
             </MotionTransform>
           </div>
         </MotionSteps>
+      </Slide>
+
+      {/* Github Issue Centric Section Title */}
+      <GlitchTitleSlide
+        id="github-issue-title"
+        title="Github Issue centric"
+        subtitle="Single source of truth"
+      />
+
+      {/* Github Issue Mermaid Diagram Slide */}
+      <Slide id="github-issue-diagram" background={darkBg}>
+        <MermaidDiagram
+          id="github-issue-flow"
+          chart={`
+flowchart TB
+    subgraph GH["GitHub Issue"]
+        direction TB
+        ISSUE["Issue"]
+        BODY["Body"]
+        COMMENTS["Comments"]
+        LABELS["Labels"]
+        MILESTONES["Milestones"]
+    end
+    
+    subgraph SOURCES["Data Sources"]
+        CONFIG["Config"]
+        STATE["State"]
+        HISTORY["History"]
+    end
+    
+    ISSUE --> BODY
+    ISSUE --> COMMENTS
+    ISSUE --> LABELS
+    ISSUE --> MILESTONES
+    
+    BODY --> CONFIG
+    COMMENTS --> STATE
+    LABELS --> STATE
+    MILESTONES --> HISTORY
+          `}
+        />
       </Slide>
     </>
   );

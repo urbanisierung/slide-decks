@@ -15,6 +15,7 @@
   "dependencies": {
     "@reactslides/cli": "0.0.11",
     "@slide-decks/core": "workspace:*",
+    "mermaid": "11.12.2",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   }

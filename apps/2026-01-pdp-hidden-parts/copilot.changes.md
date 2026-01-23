@@ -47,6 +47,36 @@
 - Added import for `commentSvg` from `./img/comment.svg`
 - Added import for `commentNextPhaseSvg` from `./img/comment-next-phase.svg`
 - Added import for `regularPhaseCheckSvg` from `./img/regular-phase-check.svg`
+- Added import for `mermaid` from `mermaid`
+- Added imports for `useEffect` and `useRef` from React
+
+---
+
+## Feature: Github Issue Centric Section with Mermaid Diagram
+
+**Date**: January 23, 2026
+
+### Changes Made
+
+#### Added Mermaid Support
+- **Files**: [src/Composition.tsx](src/Composition.tsx), [package.json](package.json), [packages/core/src/index.ts](../../packages/core/src/index.ts)
+- Added `mermaid` dependency (v11.12.2) to the app
+- Exported `Diagram` component from core package
+- Created custom `MermaidDiagram` React component that:
+  - Initializes mermaid with cyberpunk theme matching presentation colors
+  - Renders mermaid charts dynamically using `useEffect` and `useRef`
+  - Supports dark theme with neon pink/blue color scheme
+
+#### New Slides Added
+1. **"Github Issue centric" Section Title** (id: `github-issue-title`)
+   - Uses `GlitchTitleSlide` with title "Github Issue centric"
+   - Subtitle: "Single source of truth"
+
+2. **Github Issue Mermaid Diagram Slide** (id: `github-issue-diagram`)
+   - Dark background matching the title slides
+   - Mermaid flowchart showing GitHub Issue as central data source
+   - Shows relationships between Issue, Body, Comments, Labels, Milestones
+   - Connects to Config, State, and History data sources
 
 ---
 
