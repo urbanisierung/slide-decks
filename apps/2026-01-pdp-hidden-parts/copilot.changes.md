@@ -29,8 +29,24 @@
    - 2 animation steps: initial view → 2.5x zoom
    - Same pattern as the intro slide (Slide 2)
 
+3. **"Next Phase" Section Title** (id: `next-phase-title`)
+   - Uses the `GlitchTitleSlide` component with title "Next Phase"
+
+4. **Next Phase Diagram Slide** (id: `next-phase-diagram`)
+   - Embeds `comment-next-phase.svg` diagram
+   - Zoom animation: initial view → 2.5x zoom
+
+5. **"Housekeeping" Section Title** (id: `housekeeping-title`)
+   - Uses the `GlitchTitleSlide` component with title "Housekeeping"
+
+6. **Housekeeping Diagram Slide** (id: `housekeeping-diagram`)
+   - Embeds `regular-phase-check.svg` diagram
+   - Zoom animation: initial view → 2.5x zoom
+
 #### Import Changes
 - Added import for `commentSvg` from `./img/comment.svg`
+- Added import for `commentNextPhaseSvg` from `./img/comment-next-phase.svg`
+- Added import for `regularPhaseCheckSvg` from `./img/regular-phase-check.svg`
 
 ---
 

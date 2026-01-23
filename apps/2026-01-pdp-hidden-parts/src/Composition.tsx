@@ -8,6 +8,8 @@ import type React from "react";
 import handlePdpSvg from "./img/handle-pdp.svg";
 import getConfigFromGithub from "./img/get-config-from-github.svg";
 import commentSvg from "./img/comment.svg";
+import commentNextPhaseSvg from "./img/comment-next-phase.svg";
+import regularPhaseCheckSvg from "./img/regular-phase-check.svg";
 
 // Cyberpunk colors
 const neonPink = "#ff006e";
@@ -364,6 +366,82 @@ COMMAND_PREFIX=!pdp
               <img
                 src={commentSvg}
                 alt="Comment BPMN Process"
+                style={{
+                  width: "1600px",
+                  height: "1000px",
+                }}
+              />
+            </MotionTransform>
+          </div>
+        </MotionSteps>
+      </Slide>
+
+      {/* Next Phase Section Title */}
+      <GlitchTitleSlide id="next-phase-title" title="Next Phase" />
+
+      {/* Next Phase Diagram Slide */}
+      <Slide id="next-phase-diagram" background="#ffffff">
+        <MotionSteps totalSteps={2}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              height: "100%",
+              overflow: "hidden",
+              position: "relative",
+            }}
+          >
+            <MotionTransform
+              transforms={[
+                { scale: 1, x: 0, y: 0, opacity: 1 },
+                { scale: 2.5, x: 0, y: 0, opacity: 1 },
+              ]}
+              duration={1}
+              easing="backOut"
+            >
+              <img
+                src={commentNextPhaseSvg}
+                alt="Next Phase BPMN Process"
+                style={{
+                  width: "1600px",
+                  height: "1000px",
+                }}
+              />
+            </MotionTransform>
+          </div>
+        </MotionSteps>
+      </Slide>
+
+      {/* Housekeeping Section Title */}
+      <GlitchTitleSlide id="housekeeping-title" title="Housekeeping" />
+
+      {/* Housekeeping Diagram Slide */}
+      <Slide id="housekeeping-diagram" background="#ffffff">
+        <MotionSteps totalSteps={2}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              height: "100%",
+              overflow: "hidden",
+              position: "relative",
+            }}
+          >
+            <MotionTransform
+              transforms={[
+                { scale: 1, x: 0, y: 0, opacity: 1 },
+                { scale: 2.5, x: 0, y: 0, opacity: 1 },
+              ]}
+              duration={1}
+              easing="backOut"
+            >
+              <img
+                src={regularPhaseCheckSvg}
+                alt="Housekeeping BPMN Process"
                 style={{
                   width: "1600px",
                   height: "1000px",
