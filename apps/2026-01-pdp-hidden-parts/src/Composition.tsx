@@ -751,6 +751,109 @@ flowchart LR
           </div>
         </MotionSteps>
       </Slide>
+
+      {/* Links and References Slide */}
+      <Slide id="links-references" background={darkBg}>
+        <style>{glitchStyles}</style>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+            height: "100%",
+            gap: "50px",
+          }}
+        >
+          {[
+            "https://camunda.directory/pdp",
+            "https://camunda.directory/pdp-texts",
+            "#pdp-requests",
+            "#pdp-logs",
+            "#prj-pdp-2564-test",
+          ].map((text, index) => {
+            const isUrl = text.startsWith("http");
+            const content = (
+              <div
+                key={text}
+                style={{
+                  position: "relative",
+                  display: "inline-block",
+                  animation: "glitch-skew 4s infinite ease-in-out",
+                  animationDelay: `${index * 0.2}s`,
+                }}
+              >
+                {/* Glitch layer - cyan offset */}
+                <span
+                  style={{
+                    fontSize: "64px",
+                    fontWeight: "700",
+                    color: neonBlue,
+                    position: "absolute",
+                    left: 0,
+                    top: 0,
+                    opacity: 0.8,
+                    animation: "glitch-cyan 2.5s infinite linear, glitch-clip-top 3s infinite ease-in-out",
+                    animationDelay: `${index * 0.15}s`,
+                  }}
+                  aria-hidden="true"
+                >
+                  {text}
+                </span>
+                {/* Glitch layer - pink offset */}
+                <span
+                  style={{
+                    fontSize: "64px",
+                    fontWeight: "700",
+                    color: neonPink,
+                    position: "absolute",
+                    left: 0,
+                    top: 0,
+                    opacity: 0.8,
+                    animation: "glitch-pink 2s infinite linear, glitch-clip-bottom 2.5s infinite ease-in-out",
+                    animationDelay: `${index * 0.1}s`,
+                  }}
+                  aria-hidden="true"
+                >
+                  {text}
+                </span>
+                {/* Main text */}
+                <span
+                  style={{
+                    fontSize: "64px",
+                    fontWeight: "700",
+                    color: "#ffffff",
+                    position: "relative",
+                    textShadow: `
+                      2px 0 ${neonPink}, 
+                      -2px 0 ${neonBlue},
+                      0 0 20px rgba(255, 0, 110, 0.5),
+                      0 0 40px rgba(0, 245, 255, 0.3)
+                    `,
+                  }}
+                >
+                  {text}
+                </span>
+              </div>
+            );
+
+            return isUrl ? (
+              <a
+                key={text}
+                href={text}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: "none" }}
+              >
+                {content}
+              </a>
+            ) : (
+              content
+            );
+          })}
+        </div>
+      </Slide>
     </>
   );
 };
