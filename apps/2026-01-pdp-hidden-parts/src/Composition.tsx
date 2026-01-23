@@ -35,6 +35,7 @@ const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ chart, id }) => {
         mermaid.initialize({
           startOnLoad: false,
           theme: "dark",
+          fontFamily: "ui-sans-serif, system-ui, sans-serif",
           themeVariables: {
             primaryColor: "#ff006e",
             primaryTextColor: "#ffffff",
@@ -49,6 +50,7 @@ const MermaidDiagram: React.FC<MermaidDiagramProps> = ({ chart, id }) => {
             clusterBorder: "#ff006e",
             titleColor: "#ffffff",
             edgeLabelBackground: "#0a0e27",
+            fontFamily: "ui-sans-serif, system-ui, sans-serif",
           },
           flowchart: {
             curve: "basis",
