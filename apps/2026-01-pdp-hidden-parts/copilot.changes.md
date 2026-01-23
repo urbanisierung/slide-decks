@@ -1,5 +1,39 @@
 # Copilot Changes
 
+## Feature: Reusable GlitchTitleSlide Component and New Comment Slides
+
+**Date**: January 23, 2026
+
+### Changes Made
+
+#### Created Reusable `GlitchTitleSlide` Component
+- **File**: [src/Composition.tsx](src/Composition.tsx)
+- **Reason**: User requested a reusable slide component with glitch-animated title
+
+#### Component Details
+- Extracted glitch animation styles to a shared constant (`glitchStyles`)
+- Created `GlitchTitleSlideProps` interface with:
+  - `id` (required): Unique slide identifier
+  - `title` (required): The glitch-animated title text
+  - `subtitle` (optional): Optional subtitle text below the title
+- Refactored the original title slide to use the new component
+
+#### New Slides Added
+1. **"New Comment" Section Title** (id: `new-comment-title`)
+   - Uses the `GlitchTitleSlide` component with title "New Comment"
+   - No subtitle, just the glitch-animated title
+
+2. **Comment Diagram Slide** (id: `comment-diagram`)
+   - Embeds `comment.svg` diagram
+   - Implements zoom animation using `MotionSteps` and `MotionTransform`
+   - 2 animation steps: initial view → 2.5x zoom
+   - Same pattern as the intro slide (Slide 2)
+
+#### Import Changes
+- Added import for `commentSvg` from `./img/comment.svg`
+
+---
+
 ## Enhancement: Brutalism Glitch Effect for Title Slide
 
 **Date**: January 22, 2026
