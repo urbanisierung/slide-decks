@@ -556,31 +556,27 @@ COMMAND_PREFIX=!pdp
         <MermaidDiagram
           id="github-issue-flow"
           chart={`
-flowchart TB
-    subgraph GH["GitHub Issue"]
+flowchart LR
+    subgraph COL1[" "]
         direction TB
-        ISSUE["Issue"]
-        BODY["Body"]
-        COMMENTS["Comments"]
-        LABELS["Labels"]
-        MILESTONES["Milestones"]
+        subgraph SLACK["Slack"]
+            A["!pdp command"]
+        end
+        subgraph GITHUB["Github"]
+            B["!pdp command"]
+            C["Project change"]
+        end
     end
     
-    subgraph SOURCES["Data Sources"]
-        CONFIG["Config"]
-        STATE["State"]
-        HISTORY["History"]
+    subgraph COL2[" "]
+        subgraph C8["C8 Process"]
+            D["Inbound Connector \n(Github webhook)"]
+        end
     end
     
-    ISSUE --> BODY
-    ISSUE --> COMMENTS
-    ISSUE --> LABELS
-    ISSUE --> MILESTONES
-    
-    BODY --> CONFIG
-    COMMENTS --> STATE
-    LABELS --> STATE
-    MILESTONES --> HISTORY
+    A --> B
+    B --> D
+    C --> D
           `}
         />
       </Slide>
