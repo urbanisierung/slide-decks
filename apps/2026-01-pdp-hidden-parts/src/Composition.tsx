@@ -12,6 +12,7 @@ import getConfigFromGithub from "./img/get-config-from-github.svg";
 import commentSvg from "./img/comment.svg";
 import commentNextPhaseSvg from "./img/comment-next-phase.svg";
 import regularPhaseCheckSvg from "./img/regular-phase-check.svg";
+import projectFieldsPng from "./img/project-fields.png";
 
 interface MermaidDiagramProps {
   chart: string;
@@ -706,6 +707,46 @@ flowchart LR
                   </div>
                 </div>
               </div>
+            </MotionTransform>
+          </div>
+        </MotionSteps>
+      </Slide>
+
+      {/* Project Fields Slide */}
+      <Slide id="project-fields" background="#0D1117">
+        <MotionSteps totalSteps={4}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              height: "100%",
+              overflow: "hidden",
+              position: "relative",
+            }}
+          >
+            <MotionTransform
+              transforms={[
+                { scale: 1, x: 0, y: 0, opacity: 1 },
+                { scale: 2.5, x: 0, y: 700, opacity: 1 },
+                { scale: 2.5, x: 0, y: -300, opacity: 1 },
+                { scale: 2.5, x: 0, y: -700, opacity: 1 },
+              ]}
+              duration={1}
+              easing="backOut"
+            >
+              <img
+                src={projectFieldsPng}
+                alt="Project Fields"
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  objectFit: "contain",
+                  boxShadow: "0 0 60px 20px rgba(180, 130, 255, 0.5), 0 0 120px 40px rgba(180, 130, 255, 0.3)",
+                  borderRadius: "8px",
+                }}
+              />
             </MotionTransform>
           </div>
         </MotionSteps>
