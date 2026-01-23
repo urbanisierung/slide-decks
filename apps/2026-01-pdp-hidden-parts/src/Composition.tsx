@@ -537,7 +537,7 @@ COMMAND_PREFIX=!pdp
 
       {/* Comment Diagram Slide */}
       <Slide id="comment-diagram" background="#ffffff">
-        <MotionSteps totalSteps={2}>
+        <MotionSteps totalSteps={4}>
           <div
             style={{
               display: "flex",
@@ -552,7 +552,9 @@ COMMAND_PREFIX=!pdp
             <MotionTransform
               transforms={[
                 { scale: 1, x: 0, y: 0, opacity: 1 },
+                { scale: 2.5, x: 0, y: 800, opacity: 1 },
                 { scale: 2.5, x: 0, y: 0, opacity: 1 },
+                { scale: 2.5, x: 0, y: -800, opacity: 1 },
               ]}
               duration={1}
               easing="backOut"
@@ -575,7 +577,7 @@ COMMAND_PREFIX=!pdp
 
       {/* Next Phase Diagram Slide */}
       <Slide id="next-phase-diagram" background="#ffffff">
-        <MotionSteps totalSteps={2}>
+        <MotionSteps totalSteps={6}>
           <div
             style={{
               display: "flex",
@@ -590,7 +592,11 @@ COMMAND_PREFIX=!pdp
             <MotionTransform
               transforms={[
                 { scale: 1, x: 0, y: 0, opacity: 1 },
-                { scale: 2.5, x: 0, y: 0, opacity: 1 },
+                { scale: 2.5, x: 1200, y: 0, opacity: 1 },
+                { scale: 2.5, x: 200, y: 300, opacity: 1 },
+                { scale: 2.5, x: -1000, y: 300, opacity: 1 },
+                { scale: 2.5, x: 200, y: -300, opacity: 1 },
+                { scale: 2.5, x: -1000, y: -300, opacity: 1 },
               ]}
               duration={1}
               easing="backOut"
