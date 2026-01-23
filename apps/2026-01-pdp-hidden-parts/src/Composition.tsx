@@ -580,6 +580,134 @@ flowchart LR
           `}
         />
       </Slide>
+
+      {/* Commands Slide with zoom effect */}
+      <Slide id="commands-overview" background={darkBg}>
+        <MotionSteps totalSteps={4}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              height: "100%",
+              overflow: "hidden",
+              position: "relative",
+            }}
+          >
+            <MotionTransform
+              transforms={[
+                { scale: 1, x: 0, y: 0, opacity: 1 },
+                { scale: 1.8, x: 750, y: -400, opacity: 1 },
+                { scale: 1.8, x: 750, y: 350, opacity: 1 },
+                { scale: 1.4, x: -650, y: 130, opacity: 1 },
+              ]}
+              duration={1}
+              easing="backOut"
+            >
+              <div
+                style={{
+                  display: "flex",
+                  gap: "60px",
+                  padding: "60px",
+                }}
+              >
+                {/* Left Column */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "50px" }}>
+                  {/* Group 1: Slack and Github Commands */}
+                  <div
+                    style={{
+                      background: "#1a1e3a",
+                      borderRadius: "16px",
+                      padding: "50px",
+                      border: `3px solid ${neonBlue}`,
+                      boxShadow: `0 0 30px rgba(0, 245, 255, 0.3)`,
+                    }}
+                  >
+                    <h3
+                      style={{
+                        color: neonBlue,
+                        fontSize: "42px",
+                        marginBottom: "30px",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Slack & Github Commands
+                    </h3>
+                    <div style={{ fontFamily: "monospace", fontSize: "28px", lineHeight: 2.2, color: "#ffffff" }}>
+                      <div><span style={{ color: neonPink }}>!pdp next</span> - Switch to next phase</div>
+                      <div><span style={{ color: neonPink }}>!pdp design</span> &lt;link&gt; - Update design link</div>
+                      <div><span style={{ color: neonPink }}>!pdp review</span> - AI feedback on Epic</div>
+                    </div>
+                  </div>
+
+                  {/* Group 2: Slack only Commands */}
+                  <div
+                    style={{
+                      background: "#1a1e3a",
+                      borderRadius: "16px",
+                      padding: "50px",
+                      border: `3px solid ${neonPink}`,
+                      boxShadow: `0 0 30px rgba(255, 0, 110, 0.3)`,
+                    }}
+                  >
+                    <h3
+                      style={{
+                        color: neonPink,
+                        fontSize: "42px",
+                        marginBottom: "30px",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Slack Only Commands
+                    </h3>
+                    <div style={{ fontFamily: "monospace", fontSize: "28px", lineHeight: 2.2, color: "#ffffff" }}>
+                      <div><span style={{ color: neonBlue }}>!pdp decision</span> &lt;text&gt; - Add decision comment</div>
+                      <div><span style={{ color: neonBlue }}>!pdp comment</span> &lt;text&gt; - Add regular comment</div>
+                      <div><span style={{ color: neonBlue }}>!pdp progress</span> &lt;1-5&gt; &lt;text&gt; - Add progress</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Column */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "50px" }}>
+                  {/* Group 3: Github only Commands */}
+                  <div
+                    style={{
+                      background: "#1a1e3a",
+                      borderRadius: "16px",
+                      padding: "50px",
+                      border: `3px solid ${neonBlue}`,
+                      boxShadow: `0 0 30px rgba(0, 245, 255, 0.3)`,
+                      minWidth: "700px",
+                    }}
+                  >
+                    <h3
+                      style={{
+                        color: neonBlue,
+                        fontSize: "42px",
+                        marginBottom: "30px",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Github Only Commands
+                    </h3>
+                    <div style={{ fontFamily: "monospace", fontSize: "28px", lineHeight: 2.2, color: "#ffffff" }}>
+                      <div><span style={{ color: neonPink }}>/riskAssessment</span> - Trigger risk assessment</div>
+                      <div><span style={{ color: neonPink }}>!pdp slack</span> - Join project channel</div>
+                      <div><span style={{ color: neonPink }}>!pdp slack</span> @handle - Invite to channel</div>
+                      <div><span style={{ color: neonPink }}>!pdp migrate</span> channelId=... - Migrate epic</div>
+                      <div><span style={{ color: neonPink }}>!pdp pause</span> - Pause reminders</div>
+                      <div><span style={{ color: neonPink }}>!pdp continue</span> - Resume reminders</div>
+                      <div><span style={{ color: neonPink }}>!pdp restart-check</span> - Restart house keeping</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </MotionTransform>
+          </div>
+        </MotionSteps>
+      </Slide>
     </>
   );
 };
