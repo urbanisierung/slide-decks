@@ -1,0 +1,22 @@
+{
+  "name": "@slide-decks/core",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "description": "Core dependencies for slide deck generation",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "check": "tsc --noEmit",
+    "test": "echo 'No tests yet'",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@reactslides/cli": "0.0.11",
+    "@reactslides/core": "0.0.11",
+    "@reactslides/shared-ui": "0.0.11",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  }
+}

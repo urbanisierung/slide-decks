@@ -1,0 +1,22 @@
+{
+  "name": "@slide-decks/2026-01-pdp-hidden-parts",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "description": "PDP: the hidden parts - Slide deck presentation",
+  "scripts": {
+    "dev": "reactslides dev",
+    "render": "reactslides export --pdf -o out",
+    "build": "tsc --noEmit",
+    "check": "tsc --noEmit",
+    "test": "echo 'No tests yet'",
+    "clean": "rm -rf out"
+  },
+  "dependencies": {
+    "@reactslides/cli": "0.0.11",
+    "@slide-decks/core": "workspace:*",
+    "mermaid": "11.12.2",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  }
+}
